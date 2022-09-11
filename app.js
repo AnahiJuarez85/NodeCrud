@@ -1,8 +1,13 @@
-require("dotenv").config()
-const express = require("express")
-const cors = require("cors")
-const dbConnect = require('./config/mongo')
-const app = express()
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const dbConnectNoSql = require('./config/mongo');
+const {dbConnectMySql} = require('./config/mysql');
+const app = express();
+
+
+
+const ENGINE_DB = process.env.ENGINE_DB;
 
 app.use(cors())
 app.use(express.json())
@@ -13,10 +18,9 @@ const port = process.env.PORT || 3000
  * Aqui invocamos a las rutas
  */
 //TODO localhost/api/
-app.use("/api",require("./routes"))
+app.use("/api",require("./routes"));
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
-})
-
-dbConnect()
+});
+(ENGINE_DB === "nosql") ? dbConnectNoSql() : dbConnectMySql();

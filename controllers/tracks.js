@@ -10,8 +10,9 @@ const {handleHttpError} = require("../utils/handleError");
 const getItems = async (req, res) => {
 
     try{
-        const data = await tracksModel.find({});
-        res.send({data});
+        const user = req.user;
+        const data = await tracksModel.findAllData({});
+        res.send({data, user});
     }catch(e) {
         handleHttpError(res, "ERROR_GET_ITEMS");
     }   
@@ -26,7 +27,7 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
     try{
         req = matchedData(req);
-        const data = await tracksModel.findById({id});
+        const data = await tracksModel.findOneData(id);
         res.send({data});
 
     }catch(e){

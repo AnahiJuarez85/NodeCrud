@@ -1,5 +1,5 @@
 const express = require("express");
-const fs = require("fs")
+const fs = require("fs");
 const router = express.Router();
 
 const PATH_ROUTES =__dirname; 
@@ -15,6 +15,6 @@ fs.readdirSync(PATH_ROUTES).filter((file) => {
         console.log(`cargando rutan ${name}`)
         router.use(`/${name}`,require(`./${file}`)) //todo http:localhost:3000/api/tracks
     }
-})
+});
 
-module.exports = router
+module.exports = router;
