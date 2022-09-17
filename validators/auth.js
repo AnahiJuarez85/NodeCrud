@@ -1,8 +1,7 @@
-const {check} = require("express-validator");
+const { check } = require("express-validator");
 const validateResults = require("../utils/handleValidator")
 
-
-const validatorRegister=[
+const validatorRegister = [
     check("name")
     .exists()
     .notEmpty()
@@ -19,26 +18,23 @@ const validatorRegister=[
     .exists()
     .notEmpty()
     .isEmail(),
-    (req, res, next) =>{
+    (req, res, next) => {
         return validateResults(req, res, next)
     }
-
 ];
 
-const validatorLogin=[
-    
-    check("email")
-    .exists()
-    .notEmpty()
-    .isEmail(),
+const validatorLogin = [
     check("password")
     .exists()
     .notEmpty()
     .isLength({min:3, max:15}),
-    (req, res, next) =>{
+    check("email")
+    .exists()
+    .notEmpty()
+    .isEmail(),
+    (req, res, next) => {
         return validateResults(req, res, next)
     }
-
 ];
 
-module.exports={validatorRegister, validatorLogin}
+module.exports = { validatorRegister, validatorLogin};
