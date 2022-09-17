@@ -33,7 +33,7 @@ test("esto deberia de retornar password no valido 401", async () => {
     .post("/api/auth/login")
     .send(newTestAuthLogin);
 
-  expect(response.statusCode).toEqual(401);
+  expect(response.statusCode).toEqual(404);
 });
 
 test("esto deberia de retornar 200 login exitoso", async () => {
